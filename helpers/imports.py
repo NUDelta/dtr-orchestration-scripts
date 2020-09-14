@@ -5,6 +5,8 @@ This module includes library functions that are useful for other scripts.
 import pickle
 import os.path
 import re
+
+import gspread
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -15,9 +17,9 @@ SCOPES = ['https://www.googleapis.com/auth/drive'
           'https://www.googleapis.com/auth/drive.appdata']
 
 
-def auth():
+def auth_gdrive():
     """
-    Authenticates client to use Drive v3 api.
+    Authenticates client to use the Google Drive v3 API.
 
     :return: Service object with authentication for Google Drive v3 API.
     """
@@ -45,6 +47,14 @@ def auth():
     # auth user and return the authentication service for other functions
     return build('drive', 'v3', credentials=creds)
 
+
+def auth_gsheets():
+    """
+    Authenticates client to read and write data to Google Spreadsheets.
+
+    :return: gspread authentication object.
+    """
+    return gspread.service_account("service_account.json")
 
 def get_file_id_from_url(file_url):
     """

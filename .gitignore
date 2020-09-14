@@ -601,3 +601,5 @@ $RECYCLE.BIN/
 # user added
 token.pickle
 credentials.json
+service_account.json
+studio_db.json

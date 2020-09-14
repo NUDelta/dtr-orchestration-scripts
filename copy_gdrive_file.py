@@ -59,7 +59,7 @@ def main(file_url, folder_url, file_name):
     :return: copied file, if successful. none otherwise.
     """
     # auth client
-    service = helpers.auth()
+    service = helpers.auth_gdrive()
 
     # attempt to make a file copy
     return copy_file(service, file_url, folder_url, file_name)
