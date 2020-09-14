@@ -9,7 +9,7 @@ import studio_db_to_json as studio_db
 from copy_gdrive_file import copy_file
 
 
-def generate_sprint_logs(studio_db_dict, gdrive_service, template_url, folder_url):
+def generate_sprint_logs(studio_db_dict, gdrive_service, template_url, folder_url, qtr):
     """
     Generates a Sprint Log for each project.
 
@@ -17,6 +17,7 @@ def generate_sprint_logs(studio_db_dict, gdrive_service, template_url, folder_ur
     :param gdrive_service: Google Drive v3 authentication object.
     :param template_url: string url of original file to copy.
     :param folder_url: string url of folder to copy file to.
+    :param qtr: string name of quarter to generate Sprint Logs for.
     :return: None
     """
     # iterate over each SIG, and generate file names
@@ -28,24 +29,25 @@ def generate_sprint_logs(studio_db_dict, gdrive_service, template_url, folder_ur
         for proj in sig_info["projects"]:
             # generate filename
             curr_proj_name = proj["project_name"]
-            curr_filename = "[{abb}] {proj}".format(abb=curr_sig_abb, proj=curr_proj_name)
+            curr_filename = "[{abb}] {proj} {qtr} Sprint Log".format(abb=curr_sig_abb, proj=curr_proj_name, qtr=qtr)
 
             # copy original file for each project using curr_filename
             curr_copied_file = copy_file(gdrive_service, template_url, folder_url, curr_filename)
 
             # generate a file URL for copied file, and print out
             curr_file_id = curr_copied_file["id"]
-            print("Sprint Log for {proj}: https://docs.google.com/spreadsheets/d/{id}/edit".format(proj=curr_filename,
-                                                                                                   id=curr_file_id))
+            print("{filename}: https://docs.google.com/spreadsheets/d/{id}/edit".format(filename=curr_filename,
+                                                                                        id=curr_file_id))
 
 
-def main(template_file_url, folder_url, studio_db_url, sig_info_sheet_name, proj_info_sheet_name):
+def main(template_file_url, folder_url, qtr_str, studio_db_url, sig_info_sheet_name, proj_info_sheet_name):
     """
     Fetches Studio Database information and uses it to generate Sprint Logs.
 
     :param template_file_url: string url of original file to copy.
     :param folder_url: string url of folder to copy file to.
     :param studio_db_url: string url of Studio Database Google Spreadsheet
+    :param qtr_str: string name of quarter to generate Sprint Logs for.
     :param sig_info_sheet_name: string name of sheet where SIG information is stored.
     :param proj_info_sheet_name: string name of sheet where Project information is stored.
     :return:
@@ -55,13 +57,10 @@ def main(template_file_url, folder_url, studio_db_url, sig_info_sheet_name, proj
     gspreadsheets_service = helpers.auth_gsheets()
 
     # generate studio database
-    studio_db_spreadsheet = gspreadsheets_service.open_by_url(studio_db_url)
-    sig_info_list = studio_db.fetch_sig_info(studio_db_spreadsheet, sig_info_sheet_name)
-    proj_info_list = studio_db.fetch_proj_info(studio_db_spreadsheet, proj_info_sheet_name)
     studio_db_dict = studio_db.main(studio_db_url, sig_info_sheet_name, proj_info_sheet_name)
 
     # generate sprint logs for each project
-    generate_sprint_logs(studio_db_dict, gdrive_service, template_file_url, folder_url)
+    generate_sprint_logs(studio_db_dict, gdrive_service, template_file_url, folder_url, qtr_str)
 
 
 if __name__ == '__main__':
@@ -69,20 +68,21 @@ if __name__ == '__main__':
     arg_count = len(sys.argv) - 1
 
     # check for correct number of arguments
-    if arg_count != 5:
+    if arg_count != 6:
         raise Exception("Invalid number of arguments. Expected 5 "
-                        "(Sprint Log template URL, Sprint Log folder URL, "
+                        "(Sprint Log template URL, Sprint Log folder URL, Quarter Name, "
                         "Studio Database URL, SIG Info sheet name, Proj Info sheet name) got {}."
                         .format(arg_count))
 
     # inputs for creating Sprint Logs
     input_template_file_url = sys.argv[1]
     input_folder_url = sys.argv[2]
+    input_qtr_str = sys.argv[3]
 
     # inputs for generating studio database
-    input_studio_db_url = sys.argv[3]
-    input_sig_info_sheet_name = sys.argv[4]
-    input_proj_info_sheet_name = sys.argv[5]
+    input_studio_db_url = sys.argv[4]
+    input_sig_info_sheet_name = sys.argv[5]
+    input_proj_info_sheet_name = sys.argv[6]
 
-    main(input_template_file_url, input_folder_url,
+    main(input_template_file_url, input_folder_url, input_qtr_str,
          input_studio_db_url, input_sig_info_sheet_name, input_proj_info_sheet_name)
