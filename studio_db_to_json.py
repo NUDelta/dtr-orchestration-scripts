@@ -46,7 +46,7 @@ def fetch_sig_info(spreadsheet, sheet_name):
         for index, sig_info in enumerate(sig):
             # if SIG Heads or Faculty Mentors, parse list of people
             if header_index[index] == "SIG Heads" or header_index[index] == "Faculty Mentors":
-                person_list = sig_info.split(",")
+                person_list = [person_name.strip() for person_name in sig_info.split(",")]
                 curr_sig[header_mapping[header_index[index]]].extend(person_list)
             # else, add to appropriate field
             else:
@@ -100,7 +100,7 @@ def fetch_proj_info(spreadsheet, sheet_name):
         for index, proj_info in enumerate(proj):
             # if Students, parse list of people
             if header_index[index] == "Students":
-                person_list = proj_info.split(",")
+                person_list = [person_name.strip() for person_name in proj_info.split(",")]
                 curr_proj[header_mapping[header_index[index]]].extend(person_list)
             # else, add to appropriate field
             else:
