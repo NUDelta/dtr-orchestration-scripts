@@ -48,3 +48,17 @@ For example, to create The Weekly for Fall 2020:
 ```commandline
 python create_the_weekly.py "https://docs.google.com/spreadsheets/d/1NT9GZIZgZy7A-vEXGfY3fASkGzCkxLnKSXRfQ8ep3jE/edit?usp=sharing" "https://drive.google.com/drive/u/1/folders/1IauKy_xd70Y1uwCqSPQTV3BaFwSOK-Ig" "F2020" "https://docs.google.com/spreadsheets/d/1CqPVM11RhorBChGnhcYUNN02KMk5mhKEbuzQEY4vxQA/edit#gid=0" "SIG Info" "Proj Info"
 ```
+
+### create_mqc.py
+This script is used to create Mid-Quarter Check-In spreadsheets for each student in DTR, given a Mid-Quarter Check-In, output directory, and
+studio database with student and project information.
+
+The script is run as follows: 
+```commandline
+python create_mqc.py <mqc_template_url> <mqc_folder_url> <quarter_name> <studio_db_url> <sig_info_sheet_name> <proj_info_sheet_name>
+```
+
+For example, to create The Weekly for Fall 2020:
+```commandline
+python create_mqc.py "https://docs.google.com/spreadsheets/d/1GTXZZu7DVQxRa4mDsSD5OZivSwnv17nwAV6mroKztSs/edit?usp=sharing" "https://drive.google.com/drive/u/1/folders/1w-AK4hBoEwd_tZv-TMFabwpUgMR4RBB7" "F2020" "https://docs.google.com/spreadsheets/d/1CqPVM11RhorBChGnhcYUNN02KMk5mhKEbuzQEY4vxQA/edit#gid=0" "SIG Info" "Proj Info"
+```
