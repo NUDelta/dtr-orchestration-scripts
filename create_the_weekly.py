@@ -17,7 +17,7 @@ def generate_the_weekly(studio_db_dict, gdrive_service, template_url, folder_url
     :param gdrive_service: Google Drive v3 authentication object.
     :param template_url: string url of original file to copy.
     :param folder_url: string url of folder to copy file to.
-    :param qtr: string name of quarter to generate Sprint Logs for.
+    :param qtr: string name of quarter to generate The Weekly for.
     :return: None
     """
     # iterate over each SIG, and generate file names for each student
@@ -46,7 +46,7 @@ def main(template_file_url, folder_url, qtr_str, studio_db_url, sig_info_sheet_n
     :param template_file_url: string url of original file to copy.
     :param folder_url: string url of folder to copy file to.
     :param studio_db_url: string url of Studio Database Google Spreadsheet
-    :param qtr_str: string name of quarter to generate Sprint Logs for.
+    :param qtr_str: string name of quarter to generate The Weekly for.
     :param sig_info_sheet_name: string name of sheet where SIG information is stored.
     :param proj_info_sheet_name: string name of sheet where Project information is stored.
     :return:
@@ -58,7 +58,7 @@ def main(template_file_url, folder_url, qtr_str, studio_db_url, sig_info_sheet_n
     # generate studio database
     studio_db_dict = studio_db.main(studio_db_url, sig_info_sheet_name, proj_info_sheet_name)
 
-    # generate sprint logs for each project
+    # generate the weekly for each student
     generate_the_weekly(studio_db_dict, gdrive_service, template_file_url, folder_url, qtr_str)
 
 
