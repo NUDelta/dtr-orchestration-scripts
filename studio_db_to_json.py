@@ -26,9 +26,24 @@ def fetch_sig_info(spreadsheet, sheet_name):
         "SIG Abbreviation": "abbreviation",
         "SIG Heads": "sig_heads",
         "Faculty Mentors": "faculty_mentors",
-        "SIG Time": "sig_time"
+        "SIG Time": "sig_time",
+        "SIG Office Hours Time": "sig_oh_time"
     }
-    header_index = {index: sig_name for index, sig_name in enumerate(header)}
+
+    # create a header index to lookup header_mapping keys by index number
+    # track any header vals not including in mapping
+    exclude_list = []
+    header_index = {}
+
+    for curr_index, curr_val in enumerate(header):
+        if curr_val in header_mapping:
+            header_index[curr_index] = curr_val
+        else:
+            exclude_list.append(curr_val)
+
+    if len(exclude_list) > 0:
+        print("The following columns were included in the Studio Database Spreadsheet, but not in the header_mapping. "
+              "They will not be included in the parsed Studio Database: {}".format(exclude_list))
 
     # iterate over each row and parse data
     output = []
@@ -39,11 +54,16 @@ def fetch_sig_info(spreadsheet, sheet_name):
             "abbreviation": "",
             "sig_heads": [],
             "faculty_mentors": [],
-            "sig_time": ""
+            "sig_time": "",
+            "sig_oh_time": ""
         }
 
         # parse each individual info field
         for index, sig_info in enumerate(sig):
+            # check if index is in header_index before proceeding
+            if index not in header_index:
+                continue
+
             # if SIG Heads or Faculty Mentors, parse list of people
             if header_index[index] == "SIG Heads" or header_index[index] == "Faculty Mentors":
                 person_list = [person_name.strip() for person_name in sig_info.split(",")]
@@ -81,7 +101,21 @@ def fetch_proj_info(spreadsheet, sheet_name):
         "PRC Link": "practical_research_canvas",
         "RRC Link": "research_research_canvas"
     }
-    header_index = {index: sig_name for index, sig_name in enumerate(header)}
+
+    # create a header index to lookup header_mapping keys by index number
+    # track any header vals not including in mapping
+    exclude_list = []
+    header_index = {}
+
+    for curr_index, curr_val in enumerate(header):
+        if curr_val in header_mapping:
+            header_index[curr_index] = curr_val
+        else:
+            exclude_list.append(curr_val)
+
+    if len(exclude_list) > 0:
+        print("The following columns were included in the Studio Database Spreadsheet, but not in the header_mapping. "
+              "They will not be included in the parsed Studio Database: {}".format(exclude_list))
 
     # iterate over each row and parse data
     output = []
@@ -98,6 +132,10 @@ def fetch_proj_info(spreadsheet, sheet_name):
 
         # parse each individual info field
         for index, proj_info in enumerate(proj):
+            # check if index is in header_index before proceeding
+            if index not in header_index:
+                continue
+
             # if Students, parse list of people
             if header_index[index] == "Students":
                 person_list = [person_name.strip() for person_name in proj_info.split(",")]
@@ -174,6 +212,7 @@ def export_studio_db_as_json(studio_db_dict, output_file):
             "name": sig_name,
             "abbreviation": sig_info["abbreviation"],
             "sig_time": sig_info["sig_time"],
+            "sig_oh_time": sig_info["sig_oh_time"],
             "sig_heads": sig_info["sig_heads"],
             "faculty_mentors": sig_info["faculty_mentors"],
             "students": sig_info["students"],
