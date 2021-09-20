@@ -22,6 +22,19 @@ For example:
 python studio_db_to_json.py "https://docs.google.com/spreadsheets/d/1CqPVM11RhorBChGnhcYUNN02KMk5mhKEbuzQEY4vxQA/edit#gid=0" "SIG Info" "Proj Info"
 ```
 
+### create_ipm.py
+This script is used to create Individal Progress Maps (IPMs) for a list of students specified in the command line argument, given a IPM template and an output directory.
+
+The script is run as follows:
+```commandline
+python create_ipm.py <ipm_template_url> <ipm_folder_url> "[\"list\", \"of\", \"students\"]"
+```
+
+For example:
+```commandline
+python create_ipm.py "https://docs.google.com/spreadsheets/d/1AD5GSQ0K3gyblHPxOsP2E6b36DqLuW-WDqvi_GQSFN4/edit\?usp\=sharing" "https://drive.google.com/drive/u/1/folders/1rvw7IJKENjqsvLcQvb4tvld5L6skjSqH" "[\"Leesha Maliakal Shah\", \"Gobi Dasu\", \"Ryan Louie\", \"Kapil Garg\", \"Harrison Kwik\"]"
+```
+
 ### create_sprint_logs.py
 This script is used to create Sprint Logs for each student in DTR, given a Sprint Log template, output directory, and studio database with student and project information.
 
