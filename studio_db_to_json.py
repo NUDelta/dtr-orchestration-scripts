@@ -99,7 +99,8 @@ def fetch_proj_info(spreadsheet, sheet_name):
         "Project Name": "project_name",
         "Sprint Log Link": "sprint_log",
         "PRC Link": "practical_research_canvas",
-        "RRC Link": "research_research_canvas"
+        "RRC Link": "research_research_canvas",
+        "Compass Link": "compass"
     }
 
     # create a header index to lookup header_mapping keys by index number
@@ -127,7 +128,8 @@ def fetch_proj_info(spreadsheet, sheet_name):
             "project_name": "",
             "sprint_log": "",
             "practical_research_canvas": "",
-            "research_research_canvas": ""
+            "research_research_canvas": "",
+            "compass": ""
         }
 
         # parse each individual info field
@@ -182,7 +184,8 @@ def create_studio_db_dict(sig_info_list, proj_info_list):
             "documents": {
                 "sprint_log": proj["sprint_log"],
                 "practical_research_canvas": proj["practical_research_canvas"],
-                "research_research_canvas": proj["research_research_canvas"]
+                "research_research_canvas": proj["research_research_canvas"],
+                "compass": proj["compass"]
             }
         }
 
@@ -223,6 +226,7 @@ def export_studio_db_as_json(studio_db_dict, output_file):
                     "Sprint Log": proj["documents"]["sprint_log"],
                     "Practical Research Canvas": proj["documents"]["practical_research_canvas"],
                     "Research Research Canvas": proj["documents"]["research_research_canvas"],
+                    "Compass": proj["documents"]["compass"]
                 }
             } for proj in sig_info["projects"]]
         }
