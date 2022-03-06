@@ -71,7 +71,21 @@ The script is run as follows:
 python create_mqc.py <mqc_template_url> <mqc_folder_url> <quarter_name> <studio_db_url> <sig_info_sheet_name> <proj_info_sheet_name>
 ```
 
-For example, to create The Weekly for Fall 2020:
+For example, to create the Mid-Quarter Check-In for Fall 2020:
 ```commandline
 python create_mqc.py "https://docs.google.com/spreadsheets/d/1GTXZZu7DVQxRa4mDsSD5OZivSwnv17nwAV6mroKztSs/edit?usp=sharing" "https://drive.google.com/drive/u/1/folders/1w-AK4hBoEwd_tZv-TMFabwpUgMR4RBB7" "F2020" "https://docs.google.com/spreadsheets/d/1CqPVM11RhorBChGnhcYUNN02KMk5mhKEbuzQEY4vxQA/edit#gid=0" "SIG Info" "Proj Info"
+```
+
+### create_eoq_assessment.py
+This script is used to create End-of-Quarter Self-Assessment spreadsheets for each student in DTR, given a template, output directory, and
+studio database with student and project information.
+
+The script is run as follows:
+```commandline
+python create_eoq_assessment.py <eoq-assessment_template_url> <eoq-assessment_folder_url> <quarter_name> <studio_db_url> <sig_info_sheet_name> <proj_info_sheet_name>
+```
+
+For example, to create The Weekly for Winter 2022:
+```commandline
+python create_eoq_assessment.py "https://docs.google.com/spreadsheets/d/188qL45SYEmURRuLc-vV6VtlDQwOiWEaF01yVe_1CiTc/edit?usp=sharing" "https://drive.google.com/drive/folders/1lhGlnu5SY2_3tIFuckbxNDE0xEIGyFFL" "W2022" "https://docs.google.com/spreadsheets/d/1CqPVM11RhorBChGnhcYUNN02KMk5mhKEbuzQEY4vxQA/edit#gid=0" "SIG Info" "Proj Info"
 ```
