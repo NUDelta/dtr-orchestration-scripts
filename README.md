@@ -85,7 +85,19 @@ The script is run as follows:
 python create_eoq_assessment.py <eoq-assessment_template_url> <eoq-assessment_folder_url> <quarter_name> <studio_db_url> <sig_info_sheet_name> <proj_info_sheet_name>
 ```
 
-For example, to create The Weekly for Winter 2022:
+For example, to create End-of-Quarter Self-Assessments for Winter 2022:
 ```commandline
 python create_eoq_assessment.py "https://docs.google.com/spreadsheets/d/188qL45SYEmURRuLc-vV6VtlDQwOiWEaF01yVe_1CiTc/edit?usp=sharing" "https://drive.google.com/drive/folders/1lhGlnu5SY2_3tIFuckbxNDE0xEIGyFFL" "W2022" "https://docs.google.com/spreadsheets/d/1CqPVM11RhorBChGnhcYUNN02KMk5mhKEbuzQEY4vxQA/edit#gid=0" "SIG Info" "Proj Info"
 ```
+
+### create_eoq_checklist.py
+This script is used to create End-of-Quarter Checklists for each project in DTR, given a checklist template, output directory, and studio database with student and project information.
+
+The script is run as follows:
+```commandline
+python create_eoq_checklist.py <eoq_checklist_template_url> <eoq_checklistfolder_url> <quarter_name> <studio_db_url> <sig_info_sheet_name> <proj_info_sheet_name>
+```
+
+For example, to create End-of-Quarter Checklists for Sprint 2022:
+```commandline
+python create_eoq_checklist.py "https://docs.google.com/document/d/1AZcju1KmgREFn8QYDShK27nDYxp1ZqvU8BxyKp17a1I/edit?usp=sharing" "https://drive.google.com/drive/u/1/folders/1MhY7EmMSJYOoeBOgpAI9PkrcQJMAHleS" "S2022" "https://docs.google.com/spreadsheets/d/1CqPVM11RhorBChGnhcYUNN02KMk5mhKEbuzQEY4vxQA/edit#gid=0" "SIG Info" "Proj Info"
