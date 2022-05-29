@@ -36,7 +36,7 @@ def generate_eoq_checklist(studio_db_dict, gdrive_service, template_url, folder_
 
             # generate a file URL for copied file, and print out
             curr_file_id = curr_copied_file["id"]
-            print("{filename}: https://docs.google.com/spreadsheets/d/{id}/edit".format(filename=curr_filename,
+            print("{filename}: https://docs.google.com/document/d/{id}/edit".format(filename=curr_filename,
                                                                                         id=curr_file_id))
 
 
