@@ -24,11 +24,17 @@ def generate_mqc(studio_db_dict, gdrive_service, template_url, folder_url, qtr):
     for sig_name, sig_info in studio_db_dict.items():
         # iterate over each student in SIG
         for curr_student in sig_info["students"]:
-            # format student name to only be first name
-            curr_student_first_name = curr_student.split(' ')[0]
+            # get the first and last name for the person
+            curr_student_first_name, curr_student_last_name = curr_student.split(' ')
+
+            # get last initial
+            curr_student_last_initial = curr_student_last_name[0].upper()
 
             # generate filename
-            curr_filename = "{name} -- Mid-Quarter Check-In {qtr}".format(name=curr_student_first_name, qtr=qtr)
+            curr_filename = "{first_name} {last_i}. -- Mid-Quarter Check-In {qtr}".format(
+                first_name=curr_student_first_name,
+                last_i=curr_student_last_initial,
+                qtr=qtr)
 
             # copy original file for each project using curr_filename
             curr_copied_file = copy_file(gdrive_service, template_url, folder_url, curr_filename)
