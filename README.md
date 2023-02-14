@@ -76,6 +76,19 @@ For example, to create the Mid-Quarter Check-In for Fall 2020:
 python create_mqc_individual.py "https://docs.google.com/spreadsheets/d/1GTXZZu7DVQxRa4mDsSD5OZivSwnv17nwAV6mroKztSs/edit?usp=sharing" "https://drive.google.com/drive/u/1/folders/1w-AK4hBoEwd_tZv-TMFabwpUgMR4RBB7" "F2020" "https://docs.google.com/spreadsheets/d/1CqPVM11RhorBChGnhcYUNN02KMk5mhKEbuzQEY4vxQA/edit#gid=0" "SIG Info" "Proj Info"
 ```
 
+### create_mqc_proj.py
+This script is used to create Mid-Quarter Check-ins for each project in DTR, given a Mid-Quarter Check-in template, output directory, and studio database with student and project information.
+
+The script is run as follows:
+```commandline
+python create_mqc_proj.py <mqc_proj_template_url> <mqc_proj_folder_url> <quarter_name> <studio_db_url> <sig_info_sheet_name> <proj_info_sheet_name>
+```
+
+For example, to create Mid-Quarter Check-ins for Fall 2020:
+```commandline
+python create_mqc_proj.py "https://docs.google.com/spreadsheets/d/1o1bA6VzpeTfXIhT-PwB8wm7uFfAt6saISTAmGB67d2w/edit#gid=0" "https://drive.google.com/drive/u/1/folders/1fvmX54RwN5YDjMc1id9phsmB6OSvfKcQ" "F2020" "https://docs.google.com/spreadsheets/d/1CqPVM11RhorBChGnhcYUNN02KMk5mhKEbuzQEY4vxQA/edit#gid=0" "SIG Info" "Proj Info"
+```
+
 ### create_eoq_assessment.py
 This script is used to create End-of-Quarter Self-Assessment spreadsheets for each student in DTR, given a template, output directory, and
 studio database with student and project information.
